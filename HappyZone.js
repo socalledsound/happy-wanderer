@@ -10,13 +10,15 @@ class HappyZone{
         this.freeze = false
     }
 
+    activate(){
+        this.activated = true
+    }
+
+
     move(){
         if(random(0,100) > 95){
-            if(!this.freeze){
-                this.x = random(0, canvasWidth - this.size)
-                this.y = random(0, canvasHeight - this.size)
-            }
-          
+            this.x = random(0, canvasWidth - this.size)
+            this.y = random(0, canvasHeight - this.size)
         } 
     }
 
@@ -32,15 +34,22 @@ class HappyZone{
         rect(this.x, this.y, this.size, this.size)
     }
 
-    restart = () => {
-        console.log('should restart')
-        this.activated = false
-        this.freeze = false
-        happyTimes.restarting = false
+    leave(){
+        this.happy = false
+        this.activated = false;
         this.x = random(0, canvasWidth - this.size)
         this.y = random(0, canvasHeight - this.size)
-
     }
+
+    // restart = () => {
+    //     console.log('should restart')
+    //     this.activated = false
+    //     this.freeze = false
+    //     happyTimes.restarting = false
+    //     this.x = random(0, canvasWidth - this.size)
+    //     this.y = random(0, canvasHeight - this.size)
+
+    // }
 
     update(){
         this.move()

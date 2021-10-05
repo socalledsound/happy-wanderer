@@ -12,6 +12,21 @@ class Wanderer {
         this.happy = false
     }
 
+    bliss(){
+        this.speedX = 0
+        this.speedY = 0
+        this.happy = true
+    }
+
+    deBliss(){
+        this.speedX = this.initSpeedX
+        this.speedY = this.initSpeedY
+        this.happy = false
+    }
+
+
+    
+
     checkEdges(){
         if(this.x < 0){
             this.x = canvasWidth
@@ -28,27 +43,7 @@ class Wanderer {
 
     }
 
-    checkHappy(happyTimes){
-        if( checkCollisionCircleSquare(this.x, this.y, this.size, happyTimes.x, happyTimes.y, happyTimes.size) ){
-            this.speedX = 0
-            this.speedY = 0
-            this.happy = true
-            happyTimes.freeze = true
-            happyTimes.activated = true
-
-            if(happyTimes.freeze && !happyTimes.restarting){
-                setTimeout(() => happyTimes.restart(), 1000)
-                happyTimes.restarting = true
-            }
-           
-        }else{
-            this.speedX = this.initSpeedX
-            this.speedY = this.initSpeedY
-            this.happy = false
-        }
-
-    }
-
+    
     move(){
         this.x += this.speedX
         this.y += this.speedY
@@ -76,8 +71,7 @@ class Wanderer {
             arc(this.x, this.y, this.size/4, this.size/4, QUARTER_PI, PI - QUARTER_PI)
     }
 
-    update(happyTimes){
-        this.checkHappy(happyTimes)
+    update(){
         this.checkEdges()
         this.move()
     }
